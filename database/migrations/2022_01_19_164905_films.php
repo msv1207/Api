@@ -18,7 +18,7 @@ class Films extends Migration
             $table->string('title');
             $table->string('original_title')->nullable();
             $table->longtext('description')->nullable();
-            $table->string('release_date')->nullable();
+            $table->string('release_date')->nullable()->default("no date");
             $table->text('poster_path')->nullable();
             $table->string('language');
             $table->float('popularity');
