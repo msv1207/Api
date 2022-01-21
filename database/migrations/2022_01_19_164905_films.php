@@ -18,7 +18,7 @@ class Films extends Migration
             $table->string('title');
             $table->string('original_title')->nullable();
             $table->longtext('description')->nullable();
-            $table->date('release_date')->nullable();
+            $table->string('release_date')->nullable();
             $table->text('poster_path')->nullable();
             $table->string('language');
             $table->float('popularity');
@@ -26,8 +26,8 @@ class Films extends Migration
             $table->boolean('adult');
             $table->string('budget')->nullable();
             $table->string('revenue')->nullable();
-            $table->bigInteger('run_time');
-            $table->string('production_countries');
+//            $table->bigInteger('run_time')->nullable();
+            $table->string('production_countries')->nullable();
             $table->string('original_id');
             $table->timestamps();
         });

@@ -44,6 +44,19 @@ class test extends Command
      */
     public function handle()
     {
+
+        $response =
+            Http::get("https://api.themoviedb.org/3/genre/movie/list?api_key=5cf7a7c1c45476c43ef0d43846756912");
+            $response = (json_decode($response));
+            $response = ($response->results);
+
+        foreach ($response as $value) {
+
+                DB::table("category")->insert([
+                    'original_id' => "$value->id",
+                    'title' => "$value->name"
+                ]);
+            }
         for ($i=1;$i<100;$i++) {
             $response =
                 Http::get("https://api.themoviedb.org/3/movie/popular?api_key=$this->api_key&page=$i");
@@ -51,9 +64,9 @@ class test extends Command
             $response = ($response->results);
             foreach ($response as $value) {
 //                var_dump($value);
-
+//dd($value);
                 DB::table("films")->insert([
-                    'adult' => TRUE,
+                    'adult' => $value->adult,
                     'title' => "$value->original_title",
                     'original_title' => "$value->original_title",
                     'description' => "$value->overview",
