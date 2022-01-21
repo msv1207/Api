@@ -15,6 +15,7 @@ class Category extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('original_id');
             $table->text('title');
             $table->timestamps();
         });
