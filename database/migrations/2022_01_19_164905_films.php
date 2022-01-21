@@ -18,7 +18,7 @@ class Films extends Migration
             $table->string('title');
             $table->string('original_title');
             $table->longtext('description');
-            $table->date('release_date');
+            $table->date('release_date')->default("12.07.2003");
             $table->text('poster_path');
             $table->string('language');
             $table->float('popularity');
