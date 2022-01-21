@@ -16,16 +16,16 @@ class Films extends Migration
         Schema::create('films', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('original_title');
-            $table->longtext('description');
-            $table->date('release_date')->default("12.07.2003");
-            $table->text('poster_path');
+            $table->string('original_title')->nullable();
+            $table->longtext('description')->nullable();
+            $table->date('release_date')->nullable();
+            $table->text('poster_path')->nullable();
             $table->string('language');
             $table->float('popularity');
-            $table->float('vote_average');
+            $table->float('vote_average')->nullable();
             $table->boolean('adult');
-            $table->string('budget');
-            $table->string('revenue');
+            $table->string('budget')->nullable();
+            $table->string('revenue')->nullable();
             $table->bigInteger('run_time');
             $table->string('production_countries');
             $table->string('original_id');
