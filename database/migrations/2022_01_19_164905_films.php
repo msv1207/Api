@@ -24,6 +24,11 @@ class Films extends Migration
             $table->float('popularity');
             $table->float('vote_average');
             $table->boolean('adult');
+            $table->string('budget');
+            $table->string('revenue');
+            $table->bigInteger('run_time');
+            $table->string('production_countries');
+            $table->string('original_id');
             $table->timestamps();
         });
     }
