@@ -53,7 +53,7 @@ class test extends Command
 
         foreach ($response as $value) {
             DB::table("category")->insert([
-                'original_id' => "$value->id",
+                'original_category_id' => "$value->id",
                 'title' => "$value->name"
             ]);
         }

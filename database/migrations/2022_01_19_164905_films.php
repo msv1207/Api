@@ -14,6 +14,9 @@ class Films extends Migration
     public function up()
     {
         Schema::create('films', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->id();
             $table->string('title');
             $table->string('original_title')->nullable();
@@ -28,7 +31,7 @@ class Films extends Migration
             $table->string('revenue')->nullable()->default("no info");
 //            $table->bigInteger('run_time')->nullable();
             $table->string('production_countries')->nullable();
-            $table->string('original_id');
+            $table->bigInteger('original_id');
             $table->timestamps();
         });
     }

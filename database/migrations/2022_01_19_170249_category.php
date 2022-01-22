@@ -14,8 +14,11 @@ class Category extends Migration
     public function up()
     {
         Schema::create('category', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->id();
-            $table->bigInteger('original_id');
+            $table->bigInteger('original_category_id');
             $table->text('title');
             $table->timestamps();
         });
