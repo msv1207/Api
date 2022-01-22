@@ -12,9 +12,4 @@ class Category extends Model
         'original_id',
         'title'
     ];
-
-    public function film()
-    {
-        return $this->belongsToMany(Film::class, 'film_category');
-    }
 }
