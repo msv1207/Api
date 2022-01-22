@@ -12,4 +12,10 @@ class Category extends Model
         'original_id',
         'title'
     ];
+
+    protected $table = 'category';
+
+    public function films(){
+        return  $this->belongsToMany(Film::class, 'film_category');
+    }
 }

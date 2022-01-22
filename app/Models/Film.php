@@ -21,4 +21,9 @@ class Film extends Model
         'vote_average',
         'budget'
     ];
+    protected $table = 'films';
+
+    public function category(){
+        return  $this->belongsToMany(Category::class, 'film_category');
+    }
 }
