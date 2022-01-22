@@ -78,8 +78,7 @@ class test extends Command
                     'poster_path' => "$value->poster_path",
                     'language' => "$value->original_language",
                     'popularity' => "$value->popularity",
-                    'vote_average' => "$value->vote_average",
-                    'budget'=>"$value->vote_average"
+                    'vote_average' => "$value->vote_average"
 
                 ]);
             }
