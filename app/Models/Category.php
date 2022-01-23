@@ -12,4 +12,5 @@ class Category extends Model
         'original_id',
         'title'
     ];
+    protected $table = 'category';
 }

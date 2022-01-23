@@ -15,9 +15,9 @@ class FilmCategory extends Migration
     {
         Schema::create('film_category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('film_id');
+            $table->string('film_id');
             $table->foreign('film_id')->references('original_id')->on('films');
-            $table->unsignedBigInteger('category_id');
+            $table->string('category_id');
             $table->foreign('category_id')->references('original_id')->on('category');
             $table->timestamps();
         });

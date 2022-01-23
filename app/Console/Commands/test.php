@@ -45,7 +45,6 @@ class test extends Command
     public function handle()
     {
 
-
         $response =
             Http::get("https://api.themoviedb.org/3/genre/movie/list?api_key=5cf7a7c1c45476c43ef0d43846756912");
         $response = (json_decode($response));
@@ -57,32 +56,39 @@ class test extends Command
                 'title' => "$value->name"
             ]);
         }
-        for ($i=1;$i<100;$i++) {
-            $response =
-                Http::get("https://api.themoviedb.org/3/movie/popular?api_key=$this->api_key&page=$i");
-            $response = (json_decode($response));
-            $response = ($response->results);
-//            dd($response);
-            foreach ($response as $value) {
-                if( isset($value->release_date)==FALSE)
-                    $value->release_date="FUTURE";
-                if( isset($value->vote_average)==FALSE)
-                    $value->vote_average=0;
-                DB::table("films")->insert([
-                    'original_id'=>$value->id,
-                    'adult' => $value->adult,
-                    'title' => "$value->title",
-                    'original_title' => "$value->original_title",
-                    'description' => "$value->overview",
-                    'release_date' => "$value->release_date",
-                    'poster_path' => "$value->poster_path",
-                    'language' => "$value->original_language",
-                    'popularity' => "$value->popularity",
-                    'vote_average' => "$value->vote_average"
 
+        $response =
+            Http::get("https://api.themoviedb.org/3/movie/popular?api_key=5cf7a7c1c45476c43ef0d43846756912&page=1");
+        $response = (json_decode($response));
+        $response = ($response->results);
+        foreach ($response as $value) {
+            $films_genres = $value->genre_ids;
+            foreach ($films_genres as $values) {
+                DB::table("film_category")->insert([
+                    'film_id' => $value->id,
+                    'category_id' => $values
                 ]);
             }
         }
-        return 0;
+
+        foreach ($response as $value) {
+            if( isset($value->release_date)==FALSE)
+                $value->release_date="FUTURE";
+            if( isset($value->vote_average)==FALSE)
+                $value->vote_average=0;
+            DB::table("films")->insert([
+                'original_id'=>$value->id,
+                'adult' => $value->adult,
+                'title' => "$value->title",
+                'original_title' => "$value->original_title",
+                'description' => "$value->overview",
+                'release_date' => "$value->release_date",
+                'poster_path' => "$value->poster_path",
+                'language' => "$value->original_language",
+                'popularity' => "$value->popularity",
+                'vote_average' => "$value->vote_average"
+
+            ]);
+        }
     }
 }
