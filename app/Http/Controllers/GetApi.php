@@ -55,7 +55,8 @@ class GetApi extends Controller
 //            ->orWhere('description', 'LIKE', "%$findcustomer%")
 
 //$customer=FilmCategory::all()->film();
-        $test=Category::findOrFail(12)->films();
+        $test=Category::findOrFail(12)->films()->get();
+        $test=Film::findOrFail(12)->categories()->get()[1];
 //        foreach ($test->title as $tet)
 //           dump( $tet);
 //        $test=FilmCategory::findOrFail(1)->films();
