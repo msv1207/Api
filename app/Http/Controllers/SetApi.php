@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -9,6 +10,16 @@ use App\Models;
 
 class SetApi extends Controller
 {
+
+    public function SetApiFilms($id)
+    {
+
+        $getapi = Film::with('categories')->findOrFail($id);
+        $getfilms  = json_encode($getapi);
+        return $getfilms;
+
+
+    }
 
     public function SetApiPagination() {
         $per_page = \Request::get('per_page') ?: 20;
@@ -20,8 +31,9 @@ class SetApi extends Controller
 
     public function Search($find)
     {
-       $customer = Film::all()->where('title', 'LIKE', "%$find%")->category();
-            ->orWhere('original_title', 'LIKE', "%$find%")
+       $customer = Models\Film::search('Eternals')->get();
+        dd($customer);
+
     }
 
 }

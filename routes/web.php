@@ -13,6 +13,7 @@ use App\Http\Controllers\GetApi;
 |
 */
 
-Route::get("/", [GetApi::class, 'GetApi']);
-Route::get('/search/{findcustomer}', [GetApi::class, 'SearchCustomer']);
+Route::get("/api/", [GetApi::class, 'GetApi']);
+Route::get('/search/{find}', [\App\Http\Controllers\SetApi::class, 'Search']);
 Route::get('/api/films', [\App\Http\Controllers\SetApi::class, 'SetApiPagination']);
+Route::get('/api/film/category/film={id}', [\App\Http\Controllers\SetApi::class, 'SetApiFilms']);
