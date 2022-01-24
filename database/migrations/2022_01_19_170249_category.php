@@ -13,12 +13,9 @@ class Category extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
-
-            $table->engine = 'InnoDB';
-
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('original_category_id');
+            $table->bigInteger('original_id');
             $table->text('title');
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ class Category extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('categories');
     }
 }

@@ -9,11 +9,14 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'original_category_id',
+        'original_id',
         'title'
     ];
-    protected $table = 'category';
+
     public function films(){
-        return  $this->belongsToMany(Film::class, 'film_category');
+
+//       return $this->belongsToMany(Film::class)->withPivot('column1', 'column2');
+        return $this->belongsToMany(Film::class, 'film_category', 'film_id', 'film_id');
+
     }
 }
