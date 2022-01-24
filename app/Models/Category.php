@@ -17,6 +17,5 @@ class Category extends Model
 
 //       return $this->belongsToMany(Film::class)->withPivot('column1', 'column2');
         return $this->belongsToMany(Film::class, 'film_category', 'film_id', 'film_id');
-
     }
 }

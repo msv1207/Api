@@ -23,7 +23,6 @@ class Film extends Model
         'budget'
     ];
 //    protected $table = 'films';
-
     public function categories(){
         return  $this->belongsToMany(Category::class, 'film_category', 'category_id', "category_id");
     }
