@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Film;
 use App\Models\FilmCategory;
-use App\Models\test;
 use App\Models\User;
 use DebugBar\DebugBar;
 use Illuminate\Http\Request;
@@ -15,8 +14,19 @@ use Illuminate\Support\Facades\Http;
 
 class GetApi extends Controller
 {
-    private $api_key="5cf7a7c1c45476c43ef0d43846756912";
+//    private $api_key="5cf7a7c1c45476c43ef0d43846756912";
 
+    public function GetApi()
+    {
+
+//        $test=Category::findOrFail(12)->films()->get();
+        $test=Film::findOrFail(11)->categories()->get();
+//        foreach ($test->title as $tet)
+//           dump( $tet);
+//        $test=FilmCategory::findOrFail(1)->films();
+
+        return  dd(($test));
+    }
     public function SearchCustomer($findcustomer)
     {
 //        $customer = Film::all()->where('title', 'LIKE', "%$findcustomer%")->category();
@@ -24,7 +34,7 @@ class GetApi extends Controller
 
 //$customer=FilmCategory::all()->film();
 //        $test=Category::findOrFail(12)->films()->get();
-        $test=Film::findOrFail(12)->categories()->get()[1];
+//        $test=Film::findOrFail(12)->categories()->get()[1];
 //        foreach ($test->title as $tet)
 //           dump( $tet);
 //        $test=FilmCategory::findOrFail(1)->films();
