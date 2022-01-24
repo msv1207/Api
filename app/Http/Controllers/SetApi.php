@@ -18,4 +18,10 @@ class SetApi extends Controller
 
     }
 
+    public function Search($find)
+    {
+       $customer = Film::all()->where('title', 'LIKE', "%$find%")->category();
+            ->orWhere('original_title', 'LIKE', "%$find%")
+    }
+
 }
