@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Film extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'original_id',
         'adult',
@@ -21,9 +22,9 @@ class Film extends Model
         'vote_average',
         'budget'
     ];
-    protected $table = 'films';
+//    protected $table = 'films';
 
-    public function category(){
-        return  $this->belongsToMany(Category::class, 'film_category');
+    public function categories(){
+        return  $this->belongsToMany(Category::class, 'film_category', 'category_id', "category_id");
     }
 }
