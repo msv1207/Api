@@ -11,6 +11,7 @@ class Films extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('films', function (Blueprint $table) {

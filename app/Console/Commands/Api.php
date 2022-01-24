@@ -52,7 +52,6 @@ class Api extends Command
         $response = (json_decode($response));
         $response = ($response->genres);
         foreach ($response as $value) {
-
             Category::updateOrCreate([
                 'original_id' => "$value->id",
                 'title' => "$value->name"
