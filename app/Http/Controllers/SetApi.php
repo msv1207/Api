@@ -12,8 +12,7 @@ class SetApi extends Controller
 
     public function setapiurl() {
 
-
-        $api_films  = Models\Film::paginate(100);
+        $api_films  = Models\Film::paginate(1);
         $api_films_json  = json_encode($api_films);
         return $api_films_json;
 
