@@ -24,6 +24,7 @@ class Film extends Model
     ];
 //    protected $table = 'films';
     public function categories(){
-        return  $this->belongsToMany(Category::class, 'film_category', 'category_id', "category_id");
+        return  $this->belongsToMany(Category::class, 'film_category', null, null, null, 'original_id') ;
+//            'film_category', 'category_id', "category_id");
     }
 }
