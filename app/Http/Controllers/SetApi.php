@@ -10,11 +10,13 @@ use App\Models;
 class SetApi extends Controller
 {
 
-  public function setapiurl() {
+    public function setapiurl() {
 
 
-      $api = DB::table('films')->get()->toJson();
-      dd($api);
-  }
+        $api_films  = Models\Film::paginate(100);
+        $api_films_json  = json_encode($api_films);
+        return $api_films_json;
+
+    }
 
 }

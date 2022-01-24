@@ -13,4 +13,5 @@ use App\Http\Controllers\GetApi;
 |
 */
 Route::get('/', [GetApi::class, 'GetApi']);
-Route::get('/{findcustomer}', [GetApi::class, 'SearchCustomer']);
+Route::get('/search/{findcustomer}', [GetApi::class, 'SearchCustomer']);
+Route::get('/api/films', [\App\Http\Controllers\SetApi::class, 'setapiurl']);
