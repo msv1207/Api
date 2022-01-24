@@ -29,11 +29,12 @@ class SetApi extends Controller
 
     }
 
-    public function Search($find)
+    public function SearchCustomer($findcustomer)
     {
-       $customer = Models\Film::search('Eternals')->get();
-        dd($customer);
+        $customer = Film::where(
+            'title', 'LIKE', "%$findcustomer%")->get();
 
+        dd( ($customer));
     }
 
 }
