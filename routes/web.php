@@ -12,7 +12,7 @@ use App\Http\Controllers\GetApi;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get("/", [GetApi::class, 'GetApi']);
+Route::get("/{film_id}", [GetApi::class, 'GetApi']);
 //Route::get('/', [GetApi::class, 'GetApi']);
-Route::get('/search/{findcustomer}', [GetApi::class, 'SearchCustomer']);
+Route::get('/search/{findgenre}', [GetApi::class, 'SearchGenres']);
 Route::get('/api/films', [\App\Http\Controllers\SetApi::class, 'setapiurl']);

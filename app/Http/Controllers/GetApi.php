@@ -16,50 +16,16 @@ class GetApi extends Controller
 {
 //    private $api_key="5cf7a7c1c45476c43ef0d43846756912";
 
-    public function GetApi()
+    public function GetApi($film_id)
     {
-
-//        $test=Category::findOrFail(12)->films()->get();
-        $test=Film::findOrFail(11)->categories()->get();
-//        foreach ($test->title as $tet)
-//           dump( $tet);
-//        $test=FilmCategory::findOrFail(1)->films();
-
-        return  dd(($test));
-    }
-    public function SearchCustomer($findcustomer)
-    {
-//        $customer = Film::all()->where('title', 'LIKE', "%$findcustomer%")->category();
-//            ->orWhere('description', 'LIKE', "%$findcustomer%")
-
-//$customer=FilmCategory::all()->film();
-//        $test=Category::findOrFail(12)->films()->get();
-//        $test=Film::findOrFail(12)->categories()->get()[1];
-//        foreach ($test->title as $tet)
-//           dump( $tet);
-//        $test=FilmCategory::findOrFail(1)->films();
-         dd(($test));
-
-
-//for ($i=1; $i<1000;$i++) {
-//    $categories = FilmCategory::;
-// FilmCategory::a
-//            ->films()->get();
-//    dump($categories);
-//}
-//        foreach($categories as $category) {
-//            dd($category);
-//            dump($category->title);
-//        }
-
-//        return dump( $categories);
-//            FilmCategory::all()->title;
+        $test=Film::findOrFail($film_id)->categories()->get();
+        return  dd($test);
     }
 
+    public function SearchGenres($findgenre)
+    {
+        $test=Category::findOrFail($findgenre)->films()->get();
+        return  dd($test);
+    }
 
-
-//    public function Sort()
-//    {
-//        $Sorted=Film::sortBy("");
-//    }
 }
