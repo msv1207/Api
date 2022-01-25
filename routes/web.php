@@ -16,6 +16,6 @@ use App\Http\Controllers\GetApi;
 Route::get("/api/", [GetApi::class, 'GetApi']);
 Route::get('/api/v1/search={find}', [\App\Http\Controllers\SetApi::class, 'Search']);
 Route::get('/api/v1/films', [\App\Http\Controllers\SetApi::class, 'SetApiPagination']);
-Route::get('/api/v1/film={id}', [\App\Http\Controllers\SetApi::class, 'SingleMovie']);
+Route::get('/api/v1/movie', [\App\Http\Controllers\SetApi::class, 'SingleMovie']);
 
 
