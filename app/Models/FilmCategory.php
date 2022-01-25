@@ -32,4 +32,8 @@ class FilmCategory extends Model
 //    {
 //        return $this->morphedByMany(Category::class, 'category', 'categories', 'category_id');
 //    }
+
+    public function category() {
+        return $this->hasManyThrough(Film::class, Category::class, 'parent_id', 'category_id', 'id');
+    }
 }
