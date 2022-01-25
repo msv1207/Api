@@ -12,8 +12,10 @@ use App\Http\Controllers\GetApi;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [GetApi::class, 'GetApi']);
-Route::get('/getfilms', [\App\Console\Commands\test::class, 'handle']);
-Route::get('/{findcustomer}', [GetApi::class, 'searchCustomer']);
 
-Route::get('/getfilms',[GetApi::class, 'getfilm']);
+Route::get("/api/", [GetApi::class, 'GetApi']);
+Route::get('/api/v1/search={find}', [\App\Http\Controllers\SetApi::class, 'Search']);
+Route::get('/api/v1/films', [\App\Http\Controllers\SetApi::class, 'SetApiPagination']);
+Route::get('/api/v1/film={id}', [\App\Http\Controllers\SetApi::class, 'SingleMovie']);
+
+

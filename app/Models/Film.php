@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Film extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'original_id',
         'adult',
@@ -21,9 +23,10 @@ class Film extends Model
         'vote_average',
         'budget'
     ];
-    protected $table = 'films';
-
-    public function category(){
-        return  $this->belongsToMany(Category::class, 'film_category');
+//    protected $table = 'films';
+    public function categories(){
+        return  $this->belongsToMany(Category::class, 'film_category', null, null, null, 'original_id') ;
+//            'film_category', 'category_id', "category_id");
     }
+
 }
