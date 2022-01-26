@@ -23,10 +23,10 @@ class Film extends Model
         'vote_average',
         'budget'
     ];
-//    protected $table = 'films';
+    protected $table = 'films';
+
     public function categories(){
-        return  $this->belongsToMany(Category::class, 'film_category', null, null, null, 'original_id') ;
-//            'film_category', 'category_id', "category_id");
+        return  $this->belongsToMany(Category::class, 'film_category', null, null, 'original_id', 'original_id') ;
     }
 
 }

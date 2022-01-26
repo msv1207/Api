@@ -13,9 +13,9 @@ class SetApi extends Controller
 
     public function SingleMovie($id)
     {
-        $getapi = Film::with('categories')->find($id);
-        $getfilms  = json_encode($getapi);
-        return $getfilms;
+        $getapi = Film::with('categories')->findOrFail($id);
+        $getfilms  = json_decode($getapi);
+        dd($getfilms);
     }
 
     public function SetApiPagination() {
@@ -33,5 +33,14 @@ class SetApi extends Controller
         return  $api_films_json;
     }
 
+
+//    public function GenreFiltering($find)
+//    {
+//        $findgenre = Film::where('title', 'LIKE', "%$find%")
+//            ->where('categories', $find)
+//            ->get();
+//        $api_films_genre_json  = json_encode($findgenre);
+//        return  $api_films_genre_json;
+//    }
 
 }

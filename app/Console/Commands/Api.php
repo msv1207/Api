@@ -63,6 +63,7 @@ class Api extends Command
             $response = (json_decode($response));
             $response = ($response->results);
 
+
             foreach ($response as $value) {
                 if( isset($value->release_date)==FALSE)
                     $value->release_date="FUTURE";

@@ -18,4 +18,6 @@ Route::get('/api/v1/search={find}', [\App\Http\Controllers\SetApi::class, 'Searc
 Route::get('/api/v1/films', [\App\Http\Controllers\SetApi::class, 'SetApiPagination']);
 Route::get('/api/v1/film={id}', [\App\Http\Controllers\SetApi::class, 'SingleMovie']);
 
-
+Route::get('/', function () {
+    return view('welcome');
+});
