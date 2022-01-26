@@ -11,6 +11,7 @@ class Films extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('films', function (Blueprint $table) {
@@ -24,11 +25,12 @@ class Films extends Migration
             $table->float('popularity');
             $table->float('vote_average')->nullable();
             $table->boolean('adult');
-            $table->string('budget')->nullable()->default("no info");
-            $table->string('revenue')->nullable()->default("no info");
-//            $table->bigInteger('run_time')->nullable();
+//            $table->string('genre_ids');
+            $table->string('budget')->nullable();
+            $table->string('revenue')->nullable();
+            $table->bigInteger('run_time')->nullable();
             $table->string('production_countries')->nullable();
-            $table->string('original_id');
+            $table->bigInteger('original_id');
             $table->timestamps();
         });
     }
