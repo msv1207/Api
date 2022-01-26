@@ -11,14 +11,25 @@ use function PHPUnit\Framework\returnArgument;
 use App\Models\Category;
 
 
+
 class SetApi extends Controller
 {
 
+
+ 
     public function SingleMovie(Request $request)
     {
-        $get_api = Film::with('categories')->findOrFail($request->id)->get();
+            $get_api = Film::with('categories')->findOrFail($request->id)->get();
+       if ($request->get('original_id')) {
+            $getapi = Film::where('original_id', $request->get('original_id'))->get();
+        } elseif ($request->get('original_title')) {
+            $getapi = Film::where('original_title', $request->get('original_title'))->get();
+        } elseif ($request->get('title')) {
+            $getapi = Film::where('title', $request->get('title'))->get();
+        }
 
         return $get_api;
+
     }
     public function SetApiPagination(Request $request) {
 
@@ -32,10 +43,10 @@ class SetApi extends Controller
         $find=$request->find;
         $finded_films = Film::with('categories')->where(
             'title', 'LIKE', "%$find%")->get();
+
         return  $finded_films;
     }
 
-//    public function Sorting($sort_by='release_date', $sort='desc')
     public function Sorting(Request $request)
     {
         if(isset($_REQUEST["sort"])==FALSE)
