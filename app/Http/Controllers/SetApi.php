@@ -31,8 +31,8 @@ class SetApi extends Controller
     }
     public function Search($find)
     {
-        $finded_films = dd(Film::with('categories')->where(
-            'title', 'LIKE', "%$find%")->get());
+        $finded_films = Film::with('categories')->where(
+            'title', 'LIKE', "%$find%")->get();
         return  $finded_films;
     }
 
@@ -40,6 +40,10 @@ class SetApi extends Controller
     public function Sorting(Request $request)
     {
         $_REQUEST=$request;
+        if(isset($_REQUEST->sort)==FALSE)
+            $_REQUEST->sort="desc";
+        if(isset($_REQUEST->sort_by)==FALSE)
+            $_REQUEST->sort_by="release_date";
         $sort_by=$_REQUEST->sort_by;
         $query = Film::query();
         $query->when($sort_by == "title", function ($q) {
