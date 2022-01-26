@@ -38,21 +38,20 @@ class SetApi extends Controller
 //    public function Sorting($sort_by='release_date', $sort='desc')
     public function Sorting(Request $request)
     {
-        $_REQUEST=$request;
-        if(isset($_REQUEST->sort)==FALSE)
-            $_REQUEST->sort="desc";
-        if(isset($_REQUEST->sort_by)==FALSE)
-            $_REQUEST->sort_by="release_date";
-        $sort_by=$_REQUEST->sort_by;
+        if(isset($_REQUEST["sort"])==FALSE)
+            $_REQUEST["sort"]="desc";
+        if(isset($request->sort_by)==FALSE)
+            $request->sort_by="release_date";
+        $sort_by=$request->sort_by;
         $query = Film::query();
         $query->when($sort_by == "title", function ($q) {
-            $q->orderBy("title", $_REQUEST->sort);
+            $q->orderBy("title", $_REQUEST["sort"]);
         });
-        $query->when($sort_by == 'original_title', function ($q, $sort) {
-            $q->orderBy('original_title', $_REQUEST->sort);
+        $query->when($sort_by == 'original_title', function ($q) {
+            $q->orderBy('original_title', $_REQUEST["sort"]);
         });
-        $query->when($sort_by == 'release_date', function ($q, $sort) {
-            $q->orderBy('release_date', $_REQUEST->sort);
+        $query->when($sort_by == 'release_date', function ($q) {
+            $q->orderBy('release_date', $_REQUEST["sort"]);
         });
         return $query->paginate(20);
     }
