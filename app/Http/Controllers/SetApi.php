@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-//use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use function PHPUnit\Framework\returnArgument;
+use App\Models\Category;
 
 
 class SetApi extends Controller
 {
 
-    public function SingleMovie($id)
+    public function SingleMovie(Request $request)
     {
-        $get_api = Film::with('categories')->findOrFail($id);
-        $get_films  = json_encode($get_api);
+        $get_api = Film::with('categories')->findOrFail($request->id)->get();
+
         return $get_api;
     }
     public function SetApiPagination(Request $request) {
@@ -26,11 +25,11 @@ class SetApi extends Controller
         $per_page =$request->get('per_page') ?: 20;
         $api_films  = Film::with("categories")
             ->paginate($per_page);
-        $api_films_json  = json_encode($api_films);
         return $api_films;
     }
-    public function Search($find)
+    public function Search(Request $request)
     {
+        $find=$request->find;
         $finded_films = Film::with('categories')->where(
             'title', 'LIKE', "%$find%")->get();
         return  $finded_films;
@@ -56,5 +55,16 @@ class SetApi extends Controller
             $q->orderBy('release_date', $_REQUEST->sort);
         });
         return $query->paginate(20);
+    }
+    public function filter(Request $request)
+    {
+        $filter=$request->ganres;
+        $date=$request->date;
+        $finded_films = Category::with('films')
+            ->where('title', '=', "%$filter%")->get();
+        $finded_films = Film::with('categories')
+            ->where('release_date', 'like', "%$date%")->get();
+        return($finded_films);
+
     }
 }
