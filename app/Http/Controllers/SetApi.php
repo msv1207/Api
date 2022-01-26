@@ -7,29 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\Debugbar\Facades\Debugbar;
-use function PHPUnit\Framework\returnArgument;
 use App\Models\Category;
 
 
 
 class SetApi extends Controller
 {
-
-
- 
     public function SingleMovie(Request $request)
     {
-            $get_api = Film::with('categories')->findOrFail($request->id)->get();
-       if ($request->get('original_id')) {
-            $getapi = Film::where('original_id', $request->get('original_id'))->get();
-        } elseif ($request->get('original_title')) {
-            $getapi = Film::where('original_title', $request->get('original_title'))->get();
-        } elseif ($request->get('title')) {
-            $getapi = Film::where('title', $request->get('title'))->get();
-        }
-
-        return $get_api;
-
+        if (isset ($request->original_id))
+            $get_api = Film::with("categories")->where('original_id', $request->original_id);
+         elseif (isset ($request->original_title))
+            $get_api = Film::with("categories")->where('original_title', $request->original_title);
+         elseif (isset( $request->title))
+            $get_api = Film::with("categories")->where('title', $request->get('title'));
+         return $get_api->get();
     }
     public function SetApiPagination(Request $request) {
 
@@ -43,7 +35,6 @@ class SetApi extends Controller
         $find=$request->find;
         $finded_films = Film::with('categories')->where(
             'title', 'LIKE', "%$find%")->get();
-
         return  $finded_films;
     }
 
