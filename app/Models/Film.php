@@ -25,6 +25,6 @@ class Film extends Model
     ];
 
     public function categories(){
-        return  $this->belongsToMany(Category::class, 'film_category', null, null, null, 'original_id') ;
+        return  ($this->belongsToMany(Category::class, "film_category", null, null, "original_id", "original_id"));
     }
 }

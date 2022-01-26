@@ -31,8 +31,8 @@ class SetApi extends Controller
     }
     public function Search($find)
     {
-        $finded_films = Film::with('categories')->where(
-            'title', 'LIKE', "%$find%")->get();
+        $finded_films = dd(Film::with('categories')->where(
+            'title', 'LIKE', "%$find%")->get());
         $api_films_json  = ($finded_films);
         return  $api_films_json;
     }
