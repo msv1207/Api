@@ -13,9 +13,9 @@ class Category extends Model
         'title'
     ];
 
-    protected $table = 'categories';
-
     public function films(){
-        return $this->belongsToMany(Film::class, 'film_category', null, null, null, 'category_id');
+
+//       return $this->belongsToMany(Film::class)->withPivot('column1', 'column2');
+        return $this->belongsToMany(Film::class, 'film_category', null, null, 'original_id', 'original_id');
     }
 }

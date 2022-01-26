@@ -69,15 +69,11 @@ class Api extends Command
                     $value->release_date="FUTURE";
                 if( isset($value->vote_average)==FALSE)
                     $value->vote_average=0;
-
-//                $value->genre_ids=json_encode($value->genre_ids);
-
-//                var_dump($value->genre_ids);
                 Film::updateOrCreate([
                     'original_id'=>$value->id,
                     'adult' => $value->adult,
                     'title' => "$value->title",
-//                    'genre_ids' =>"$value->genre_ids",
+
                     'original_title' => "$value->original_title",
                     'description' => "$value->overview",
                     'release_date' => "$value->release_date",
