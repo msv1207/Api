@@ -33,22 +33,24 @@ class SetApi extends Controller
     {
         $finded_films = dd(Film::with('categories')->where(
             'title', 'LIKE', "%$find%")->get());
-        $api_films_json  = ($finded_films);
-        return  $api_films_json;
+        return  $finded_films;
     }
 
-    public function Sorting($sort_by='release_date')
+//    public function Sorting($sort_by='release_date', $sort='desc')
+    public function Sorting(Request $request)
     {
+        $_REQUEST=$request;
+        $sort_by=$_REQUEST->sort_by;
         $query = Film::query();
         $query->when($sort_by == "title", function ($q) {
-            return (json_encode($q->orderBy("title")));
-
+            $q->orderBy("title", $_REQUEST->sort);
         });
-        $query->when($sort_by == 'original_title', function ($q) {
-            return (json_encode($q->orderBy('original_title')->get()));
+        $query->when($sort_by == 'original_title', function ($q, $sort) {
+            $q->orderBy('original_title', $_REQUEST->sort);
         });
-        $query->when($sort_by == 'release_date', function ($q) {
-            return (json_encode($q->orderBy('release_date')->get()));
+        $query->when($sort_by == 'release_date', function ($q, $sort) {
+            $q->orderBy('release_date', $_REQUEST->sort);
         });
+        return $query->paginate(20);
     }
 }
