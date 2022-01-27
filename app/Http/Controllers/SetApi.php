@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SortRequest;
+use App\Http\Requests\SearchRequest;
+use App\Http\Requests\ListOfMoviesRequest;
 use App\Http\Requests\SingleMovieRequest;
+use App\Http\Requests\FilterRequest;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +27,14 @@ class SetApi extends Controller
             $get_api = Film::with("categories")->where('title', $request->get('title'));
          return $get_api->get();
     }
-    public function SetApiPagination(Request $request) {
+    public function SetApiPagination(ListOfMoviesRequest $request) {
 
         $per_page =$request->get('per_page') ?: 20;
         $api_films  = Film::with("categories")
             ->paginate($per_page);
         return $api_films;
     }
-    public function Search(Request $request)
+    public function Search(SearchRequest $request)
     {
         $find=$request->find;
         $finded_films = Film::with('categories')->where(
@@ -38,7 +42,7 @@ class SetApi extends Controller
         return  $finded_films;
     }
 
-    public function Sorting(Request $request)
+    public function Sorting(SortRequest $request)
     {
         if(isset($_REQUEST["sort"])==FALSE)
             $_REQUEST["sort"]="desc";
@@ -57,7 +61,7 @@ class SetApi extends Controller
         });
         return $query->paginate(20);
     }
-    public function filter(Request $request)
+    public function filter(FilterRequest $request)
     {
         if (isset($request->ganres)) {
             $filter = $request->ganres;
