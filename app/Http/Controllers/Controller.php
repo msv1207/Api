@@ -12,7 +12,6 @@ class Controller extends BaseController
 {
     public function test()
     {
-//        Film::cre
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
