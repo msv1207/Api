@@ -59,13 +59,17 @@ class SetApi extends Controller
     }
     public function filter(Request $request)
     {
-        $filter=$request->ganres;
-        $date=$request->date;
-        $finded_films = Category::with('films')
-            ->where('title', '=', "%$filter%")->get();
-        $finded_films = Film::with('categories')
-            ->whereDate('release_date', 'LIKE', "%$date%")->get();
-        return($finded_films);
+        if (isset($request->ganres)) {
+            $filter = $request->ganres;
+            $finded_films = Category::with('films')
+                ->where('title', '=', "$filter");
+        }
+        elseif(isset($request->date)) {
+            $date = $request->date;
+            $finded_films = Film::with('categories')
+                ->whereDate('release_date', 'LIKE', "%$date%");
+        }
+        return $finded_films->get();
 
     }
 }
