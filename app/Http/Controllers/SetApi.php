@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\ListOfMoviesRequest;
 use App\Http\Requests\SingleMovieRequest;
 use App\Http\Requests\FilterRequest;
@@ -32,7 +33,7 @@ class SetApi extends Controller
             ->paginate($per_page);
         return $api_films;
     }
-    public function Search(Request $request)
+    public function Search(SearchRequest $request)
     {
         $find=$request->find;
         $finded_films = Film::with('categories')->where(
