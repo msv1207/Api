@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SortRequest;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\ListOfMoviesRequest;
 use App\Http\Requests\SingleMovieRequest;
@@ -41,7 +42,7 @@ class SetApi extends Controller
         return  $finded_films;
     }
 
-    public function Sorting(Request $request)
+    public function Sorting(SortRequest $request)
     {
         if(isset($_REQUEST["sort"])==FALSE)
             $_REQUEST["sort"]="desc";
