@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SingleMovieRequest;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,10 +11,9 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Models\Category;
 
 
-
 class SetApi extends Controller
 {
-    public function SingleMovie(Request $request)
+    public function SingleMovie(SingleMovieRequest $request)
     {
         if (isset ($request->original_id))
             $get_api = Film::with("categories")->where('original_id', $request->original_id);
@@ -59,13 +59,17 @@ class SetApi extends Controller
     }
     public function filter(Request $request)
     {
-        $filter=$request->ganres;
-        $date=$request->date;
-        $finded_films = Category::with('films')
-            ->where('title', '=', "%$filter%")->get();
-        $finded_films = Film::with('categories')
-            ->where('release_date', 'like', "%$date%")->get();
-        return($finded_films);
+        if (isset($request->ganres)) {
+            $filter = $request->ganres;
+            $finded_films = Category::with('films')
+                ->where('title', '=', "$filter");
+        }
+        elseif(isset($request->date)) {
+            $date = $request->date;
+            $finded_films = Film::with('categories')
+                ->whereDate('release_date', 'LIKE', "%$date%");
+        }
+        return $finded_films->get();
 
     }
 }
