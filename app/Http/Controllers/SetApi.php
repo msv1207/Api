@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SingleMovieRequest;
+use App\Http\Requests\FilterRequest;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,7 +58,7 @@ class SetApi extends Controller
         });
         return $query->paginate(20);
     }
-    public function filter(Request $request)
+    public function filter(FilterRequest $request)
     {
         if (isset($request->ganres)) {
             $filter = $request->ganres;
