@@ -12,7 +12,9 @@ class FilmCategory extends Model
      * Get all of the posts that are assigned this tag.
      */
     protected $table = 'film_category';
+
     protected $fillable=[
         'film_id',
-        'category_id'];
+        'category_id'
+    ];
 }
