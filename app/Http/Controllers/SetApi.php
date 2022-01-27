@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ListOfMoviesRequest;
 use App\Http\Requests\SingleMovieRequest;
 use App\Http\Requests\FilterRequest;
 use App\Models\Film;
@@ -24,7 +25,7 @@ class SetApi extends Controller
             $get_api = Film::with("categories")->where('title', $request->get('title'));
          return $get_api->get();
     }
-    public function SetApiPagination(Request $request) {
+    public function SetApiPagination(ListOfMoviesRequest $request) {
 
         $per_page =$request->get('per_page') ?: 20;
         $api_films  = Film::with("categories")
