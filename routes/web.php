@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\PassportAuthController;
-use App\Http\Controllers\SetApi;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GetApi;
-Auth:
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +14,7 @@ Auth:
 */
 
 
-Route::prefix("/api/v1")->group(function () {
-    Route::get("/search={find}", [SetApi::class, 'Search']);
-    Route::get("/films", [SetApi::class, 'SetApiPagination']);
-    Route::get("/film={id}", [SetApi::class, 'SingleMovie']);
-    Route::get("/{sort_by?}/{sort?}", [SetApi::class, 'Sorting']);
-});
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+

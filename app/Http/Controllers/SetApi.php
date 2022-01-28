@@ -2,54 +2,78 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SortRequest;
+use App\Http\Requests\SearchRequest;
+use App\Http\Requests\ListOfMoviesRequest;
+use App\Http\Requests\SingleMovieRequest;
+use App\Http\Requests\FilterRequest;
 use App\Models\Film;
-//use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models;
 use Barryvdh\Debugbar\Facades\Debugbar;
-use function PHPUnit\Framework\returnArgument;
+use App\Models\Category;
 
 
 class SetApi extends Controller
 {
-
-    public function SingleMovie($id)
+    public function SingleMovie(SingleMovieRequest $request)
     {
-        $get_api = Film::with('categories')->findOrFail($id);
-        $get_films  = json_encode($get_api);
-        return $get_api;
+        if (isset ($request->original_id))
+            $get_api = Film::with("categories")->where('original_id', $request->original_id);
+         elseif (isset ($request->original_title))
+            $get_api = Film::with("categories")->where('original_title', $request->original_title);
+         elseif (isset( $request->title))
+            $get_api = Film::with("categories")->where('title', $request->get('title'));
+         return $get_api->get();
     }
-    public function SetApiPagination(Request $request) {
+    public function SetApiPagination(ListOfMoviesRequest $request) {
 
         $per_page =$request->get('per_page') ?: 20;
-        $api_films  = Film::with("categories")->paginate($per_page);
-        $api_films_json  = json_encode($api_films);
+        $api_films  = Film::with("categories")
+            ->paginate($per_page);
         return $api_films;
     }
-    public function Search($find)
+    public function Search(SearchRequest $request)
     {
-        $finded_films = dd(Film::with('categories')->where(
-            'title', 'LIKE', "%$find%")->get());
+        $find=$request->find;
+        $finded_films = Film::with('categories')->where(
+            'title', 'LIKE', "%$find%")->get();
         return  $finded_films;
     }
 
-
-    public function Sorting(Request $request)
+    public function Sorting(SortRequest $request)
     {
-        $_REQUEST=$request;
-        $sort_by=$_REQUEST->sort_by;
+        if(isset($_REQUEST["sort"])==FALSE)
+            $_REQUEST["sort"]="desc";
+        if(isset($request->sort_by)==FALSE)
+            $request->sort_by="release_date";
+        $sort_by=$request->sort_by;
         $query = Film::query();
         $query->when($sort_by == "title", function ($q) {
-            $q->orderBy("title", $_REQUEST->sort);
+            $q->orderBy("title", $_REQUEST["sort"]);
         });
-        $query->when($sort_by == 'original_title', function ($q, $sort) {
-            $q->orderBy('original_title', $_REQUEST->sort);
+        $query->when($sort_by == 'original_title', function ($q) {
+            $q->orderBy('original_title', $_REQUEST["sort"]);
         });
-        $query->when($sort_by == 'release_date', function ($q, $sort) {
-            $q->orderBy('release_date', $_REQUEST->sort);
+        $query->when($sort_by == 'release_date', function ($q) {
+            $q->orderBy('release_date', $_REQUEST["sort"]);
         });
         return $query->paginate(20);
+    }
+    public function filter(FilterRequest $request)
+    {
+        if (isset($request->ganres)) {
+            $filter = $request->ganres;
+            $finded_films = Category::with('films')
+                ->where('title', '=', "$filter");
+        }
+        elseif(isset($request->date)) {
+            $date = $request->date;
+            $finded_films = Film::with('categories')
+                ->whereDate('release_date', 'LIKE', "%$date%");
+        }
+        return $finded_films->get();
+
     }
 }

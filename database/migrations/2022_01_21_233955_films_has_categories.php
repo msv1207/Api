@@ -18,7 +18,6 @@ class FilmsHasCategories extends Migration
             $table->foreignId('film_id');
             $table->foreignId('category_id');
             $table->timestamps();
-
         });
     }
 
