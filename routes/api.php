@@ -26,5 +26,5 @@ Route::prefix("/v1")->group(function () {
     Route::get("/films", [SetApi::class, 'SetApiPagination'])->middleware('auth:sanctum');
     Route::get("/sort", [SetApi::class, 'Sorting'])->middleware('auth:sanctum');
     Route::get("/film", [SetApi::class, 'SingleMovie'])->middleware('auth:sanctum');
-    Route::get("/filter", [SetApi::class, 'filter'])->middleware('auth:sanctum');
+    Route::get("/filter", [SetApi::class, 'Filter'])->middleware('auth:sanctum');
 });

@@ -57,7 +57,7 @@ class SetApi extends Controller
         });
         return $query->paginate(20);
     }
-    public function filter(Request $request)
+    public function Filter(Request $request)
     {
         if (isset($request->ganres)) {
             $filter = $request->ganres;
