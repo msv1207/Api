@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/home', "welcome");
+Route::view('/', "welcome");
 
 
 
