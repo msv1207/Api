@@ -25,7 +25,6 @@ class Films extends Migration
             $table->float('popularity');
             $table->float('vote_average')->nullable();
             $table->boolean('adult');
-//            $table->string('genre_ids');
             $table->string('budget')->nullable();
             $table->string('revenue')->nullable();
             $table->bigInteger('run_time')->nullable();

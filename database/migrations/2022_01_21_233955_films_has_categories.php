@@ -15,20 +15,9 @@ class FilmsHasCategories extends Migration
     {
         Schema::create('film_category', function (Blueprint $table) {
             $table->id();
-//            $table->unsignedBigInteger('film_id');
-//            $table->foreign('film_id')->references('id')->on('films');
             $table->foreignId('film_id');
-//                ->constrained()
-//                ->onUpdate('cascade')
-//                ->onDelete('cascade');
             $table->foreignId('category_id');
-////                ->constrained()
-//                ->onUpdate('cascade')
-//                ->onDelete('cascade');
-//            $table->unsignedBigInteger('category_id');
-//            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
-
         });
     }
 
