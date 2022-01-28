@@ -17,7 +17,7 @@ use App\Models\Category;
 
 class SetApi extends Controller
 {
-    public function SingleMovie(SingleMovieRequest $request)
+    public function singleMovie(SingleMovieRequest $request)
     {
         if (isset ($request->original_id))
             $get_api = Film::with("categories")->where('original_id', $request->original_id);
@@ -27,14 +27,14 @@ class SetApi extends Controller
             $get_api = Film::with("categories")->where('title', $request->get('title'));
          return $get_api->get();
     }
-    public function SetApiPagination(ListOfMoviesRequest $request) {
+    public function setApiPagination(ListOfMoviesRequest $request) {
 
         $per_page =$request->get('per_page') ?: 20;
         $api_films  = Film::with("categories")
             ->paginate($per_page);
         return $api_films;
     }
-    public function Search(SearchRequest $request)
+    public function search(SearchRequest $request)
     {
         $find=$request->find;
         $finded_films = Film::with('categories')->where(
@@ -42,7 +42,7 @@ class SetApi extends Controller
         return  $finded_films;
     }
 
-    public function Sorting(SortRequest $request)
+    public function sorting(SortRequest $request)
     {
         if(isset($_REQUEST["sort"])==FALSE)
             $_REQUEST["sort"]="desc";
