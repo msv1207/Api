@@ -16,19 +16,13 @@ Auth:
 |
 */
 
-//Route::prefix("/api/v1")->group(function () {
-//    Route::get("/search={find}", [SetApi::class, 'Search'])->middleware('auth:api');
-//    Route::get("/films", [SetApi::class, 'SetApiPagination'])->middleware('auth:api');
-//    Route::get("/film={id}", [SetApi::class, 'SingleMovie'])->middleware('auth:api');
-//    Route::get("/sort_by={sort_by}", [SetApi::class, 'Sorting'])->middleware('auth:api');
-//});
+
 Route::prefix("/api/v1")->group(function () {
     Route::get("/search={find}", [SetApi::class, 'Search']);
     Route::get("/films", [SetApi::class, 'SetApiPagination']);
     Route::get("/film={id}", [SetApi::class, 'SingleMovie']);
-    Route::get("/sort_by={sort_by?}/sort={sort?}", [SetApi::class, 'Sorting']);
+    Route::get("/{sort_by?}/{sort?}", [SetApi::class, 'Sorting']);
 });
-//Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@do']);
 
 
 Route::get('/', function () {

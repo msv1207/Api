@@ -24,8 +24,7 @@ class SetApi extends Controller
     public function SetApiPagination(Request $request) {
 
         $per_page =$request->get('per_page') ?: 20;
-        $api_films  = Film::with("categories")
-            ->paginate($per_page);
+        $api_films  = Film::with("categories")->paginate($per_page);
         $api_films_json  = json_encode($api_films);
         return $api_films;
     }
@@ -36,7 +35,7 @@ class SetApi extends Controller
         return  $finded_films;
     }
 
-//    public function Sorting($sort_by='release_date', $sort='desc')
+
     public function Sorting(Request $request)
     {
         $_REQUEST=$request;
