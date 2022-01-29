@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GetApi;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +12,9 @@ use App\Http\Controllers\GetApi;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [GetApi::class, 'GetApi']);
-Route::get('/{findcustomer}', [GetApi::class, 'searchCustomer']);
+
+Route::view('/', "welcome");
+
+
+
+

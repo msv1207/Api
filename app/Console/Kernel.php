@@ -16,8 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-//        $schedule->call(GetApi::class)->daily();
+
         $schedule->command('get:api')->everyMinute();
 
     }
