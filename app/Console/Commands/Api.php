@@ -37,6 +37,9 @@ class Api extends Command
     public function __construct()
     {
        parent::__construct();
+       Film::query()->truncate();
+       FilmCategory::query()->truncate();
+       Category::query()->truncate();
 
     }
 
